@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public class ExecuterService {
     public String runCode(CodeEntity codeEntity){
         try {
-            String currentWorkingDirectory = System.getProperty("user.dir");
+//            String currentWorkingDirectory = System.getProperty("user.dir");
             String codeDirectory = null;
             String fileName;
             String className = "";
@@ -18,11 +18,15 @@ public class ExecuterService {
             String no = codeEntity.getNo();
             String code = codeEntity.getCode();
 
+            checkFolderExit();
+
             if(type.equalsIgnoreCase("python")){
-                codeDirectory = currentWorkingDirectory+"/code/python";
+//                codeDirectory = currentWorkingDirectory+"/code/python";
+                codeDirectory = "code/python";
                 fileName = no+".py";
             }else if(type.equalsIgnoreCase("java")){
-                codeDirectory = currentWorkingDirectory+"/code/java";
+//                codeDirectory = currentWorkingDirectory+"/code/java";
+                codeDirectory = "code/java";
                 className = findJavaClass(code);
                 if(className == null){
                     return "Java 未傳入正確類別名稱。";
@@ -54,6 +58,40 @@ public class ExecuterService {
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
             return "Something get Wrong";
+        }
+    }
+
+    private void checkFolderExit() {
+        File pyFolder, javaFolder, codeFolder;
+        codeFolder = new File("code");
+        pyFolder = new File("code/python");
+        javaFolder = new File("code/java");
+        System.out.println("codeFolder is "+codeFolder.getAbsolutePath());
+        System.out.println("pyFolder is "+pyFolder.getAbsolutePath());
+        System.out.println("javaFolder is "+javaFolder.getAbsolutePath());
+        if(!codeFolder.exists()){
+            boolean success = codeFolder.mkdir();
+            if (success) {
+                System.out.println("python資料夾創建成功");
+            } else {
+                System.out.println("python資料夾創建失败");
+            }
+        }
+        if(!pyFolder.exists()){
+            boolean success = pyFolder.mkdir();
+            if (success) {
+                System.out.println("python資料夾創建成功");
+            } else {
+                System.out.println("python資料夾創建失败");
+            }
+        }
+        if(!javaFolder.exists()){
+            boolean success = javaFolder.mkdir();
+            if (success) {
+                System.out.println("java資料夾創建成功");
+            } else {
+                System.out.println("java資料夾創建失败");
+            }
         }
     }
 
