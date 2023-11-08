@@ -4,7 +4,7 @@ You can write and execute Java, Python code online.
 
 ## How to deploy
 
-Please make sure you have whole project include [frontend]() and [backend](https://github.com/allen3325/coding_online_web).\
+Please make sure you have whole project include [frontend]((https://github.com/allen3325/coding_online_web)) and backend.\
 and make sure you have project structure like below:
 ```
 .
